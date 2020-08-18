@@ -1,4 +1,4 @@
-﻿using System;
+﻿using CombiningGame.Generators;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Input;
@@ -10,11 +10,12 @@ namespace CombiningGame
     /// </summary>
     public partial class MainWindow : Window
     {
+        private TwoRandomOneToTenNumbersGenerator NumbersGenerator = new TwoRandomOneToTenNumbersGenerator();
+        private readonly Stopwatch StopWatch = new Stopwatch();
+        private bool running;
         private int RightAnswersScore;
         private int WrongAnswersScore;
         private int RightAnswer;
-        private readonly Stopwatch StopWatch = new Stopwatch();
-        private bool running;
 
         public MainWindow()
         {
@@ -27,6 +28,24 @@ namespace CombiningGame
             WrongAnswersScore = 0;
             StopWatch.Start();
             running = true;
+            NumbersGenerator.GenerateRandomNumbers();
+            NumbersDisplayLabel.Content = $"{NumbersGenerator.firstNumber} * {NumbersGenerator.secondNumber} =";
+            RightAnswer = NumbersGenerator.RightAnswer;
+        }
+
+        private void OnKeyDownHandler(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Return)
+            {
+                if (running == true)
+                {
+                    CheckAnswer(RightAnswer, AnswerInputTextBox.Text);
+                    NumbersGenerator.GenerateRandomNumbers();
+                    NumbersDisplayLabel.Content = $"{NumbersGenerator.firstNumber} * {NumbersGenerator.secondNumber} =";
+                    RightAnswer = NumbersGenerator.RightAnswer;
+                    CheckStopWatch();
+                }
+            }
         }
 
         private void CheckStopWatch()
@@ -40,28 +59,6 @@ namespace CombiningGame
                 StopWatch.Stop();
                 MessageBox.Show($"Right: {RightAnswersScore}\nWrong: {WrongAnswersScore}");
             }
-        }
-
-        private void OnKeyDownHandler(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Return)
-            {
-                if (running == true)
-                {
-                    CheckAnswer(RightAnswer, AnswerInputTextBox.Text);
-                    GenerateRandomNumbers();
-                    CheckStopWatch();
-                }
-            }
-        }
-
-        private void GenerateRandomNumbers()
-        {
-            var random = new Random();
-            var firstNumber = random.Next(1, 10);
-            var secondNumber = random.Next(1, 10);
-            NumbersDisplayLabel.Content = $"{firstNumber} * {secondNumber} =";
-            RightAnswer = firstNumber * secondNumber;
         }
 
         private void CheckAnswer(int rightAnswer, string userAnswer)
