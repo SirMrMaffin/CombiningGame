@@ -8,14 +8,14 @@
         Title="Combining Game" Height="275.455" Width="424.364" ResizeMode="NoResize">
     <Grid>
         <Label Name="NumbersDisplayLabel" Content="4x10=" FontSize="60" FontWeight="Bold" HorizontalContentAlignment="Left" HorizontalAlignment="Left" Height="93" Margin="60,43,0,0" VerticalAlignment="Top" Width="187"/>
-        <TextBox HorizontalAlignment="Right" Text="40" FontSize="65" FontWeight="Bold" Height="93" Margin="0,43,60,0" VerticalAlignment="Top" Width="107"/>
+        <TextBox Name="AnswerInputTextBox" KeyDown="OnKeyDownHandler" HorizontalAlignment="Right" Text="40" FontSize="65" FontWeight="Bold" Height="93" Margin="0,43,60,0" VerticalAlignment="Top" Width="107"/>
 
 
         <Label Content="Time input: (min)" HorizontalAlignment="Left" Margin="10,0,0,60.709" VerticalAlignment="Bottom" Width="102"/>
         <TextBox Name="TimeInputTextBox" Text="5" FontSize="30" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Height="40" Margin="10,0,0,15.709" TextWrapping="Wrap" VerticalAlignment="Bottom" Width="102"/>
         <Label Content="Time left:" HorizontalAlignment="Left" Margin="302,0,0,60.709" VerticalAlignment="Bottom" Width="102"/>
-        <Label Content="05:15:22" FontSize="25" HorizontalContentAlignment="Center" HorizontalAlignment="Right" Margin="0,0,9.545,10.4" VerticalAlignment="Bottom" Height="50" Width="103"/>
+        <Label Name="TimeDisplayLabel" Content="05:15:22" FontSize="25" HorizontalContentAlignment="Center" HorizontalAlignment="Right" Margin="0,0,9.545,10.4" VerticalAlignment="Bottom" Height="50" Width="103"/>
         <Border BorderBrush="Tomato" BorderThickness="10" HorizontalAlignment="Center" Height="114" Margin="51,32,51.545,0" VerticalAlignment="Top" Width="312"/>
-        <Button x:Name="StartGameButton" FontSize="20" FontWeight="Bold" Content="START GAME" HorizontalAlignment="Center" Height="50" VerticalAlignment="Bottom" Width="144" Margin="135,0,135.545,10.709"/>
+        <Button x:Name="StartGameButton" FontSize="20" FontWeight="Bold" Content="START GAME" HorizontalAlignment="Center" Height="50" VerticalAlignment="Bottom" Width="144" Margin="135,0,135.545,10.709" Click="OnStartGameButtonClicked"/>
     </Grid>
 </Window>
