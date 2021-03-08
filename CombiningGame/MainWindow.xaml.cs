@@ -10,12 +10,12 @@ namespace CombiningGame
     /// </summary>
     public partial class MainWindow : Window
     {
-        private TwoRandomOneToTenNumbersGenerator NumbersGenerator = new TwoRandomOneToTenNumbersGenerator();
-        private readonly Stopwatch StopWatch = new Stopwatch();
-        private bool running;
-        private int RightAnswersScore;
-        private int WrongAnswersScore;
-        private int RightAnswer;
+        private readonly TwoRandomOneToTenNumbersGenerator NumbersGenerator = new TwoRandomOneToTenNumbersGenerator();
+        private readonly Stopwatch stopWatch = new Stopwatch();
+        private bool isRunning;
+        private int rightAnswersScore;
+        private int wrongAnswersScore;
+        private int rightAnswer;
 
         public MainWindow()
         {
@@ -24,25 +24,23 @@ namespace CombiningGame
 
         private void OnStartGameButtonClicked(object sender, RoutedEventArgs e)
         {
-            RightAnswersScore = 0;
-            WrongAnswersScore = 0;
-            StopWatch.Start();
-            running = true;
+            rightAnswersScore = 0;
+            wrongAnswersScore = 0;
+            stopWatch.Start();
+            isRunning = true;
             NumbersGenerator.GenerateRandomNumbers();
-            NumbersDisplayLabel.Content = $"{NumbersGenerator.firstNumber} * {NumbersGenerator.secondNumber} =";
-            RightAnswer = NumbersGenerator.RightAnswer;
+            UpdateNumbers();
         }
 
         private void OnKeyDownHandler(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Return)
             {
-                if (running == true)
+                if (isRunning)
                 {
-                    CheckAnswer(RightAnswer, AnswerInputTextBox.Text);
+                    CheckAnswer(rightAnswer, AnswerInputTextBox.Text);
                     NumbersGenerator.GenerateRandomNumbers();
-                    NumbersDisplayLabel.Content = $"{NumbersGenerator.firstNumber} * {NumbersGenerator.secondNumber} =";
-                    RightAnswer = NumbersGenerator.RightAnswer;
+                    UpdateNumbers();
                     CheckStopWatch();
                 }
             }
@@ -50,14 +48,14 @@ namespace CombiningGame
 
         private void CheckStopWatch()
         {
-            var stopWatchElapsedMilliseconds = StopWatch.ElapsedMilliseconds;
+            var stopWatchElapsedMilliseconds = stopWatch.ElapsedMilliseconds;
             var timeInput = int.Parse(TimeInputTextBox.Text) * 60 * 1000;
 
             if (stopWatchElapsedMilliseconds > timeInput)
             {
-                running = false;
-                StopWatch.Stop();
-                MessageBox.Show($"Right: {RightAnswersScore}\nWrong: {WrongAnswersScore}");
+                isRunning = false;
+                stopWatch.Stop();
+                MessageBox.Show($"Right: {rightAnswersScore}\nWrong: {wrongAnswersScore}");
             }
         }
 
@@ -65,12 +63,18 @@ namespace CombiningGame
         {
             if (rightAnswer.Equals(int.Parse(userAnswer)))
             {
-                RightAnswersScore++;
+                rightAnswersScore++;
             }
             else
             {
-                WrongAnswersScore++;
+                wrongAnswersScore++;
             }
+        }
+
+        private void UpdateNumbers()
+        {
+            NumbersDisplayLabel.Content = $"{NumbersGenerator.FirstNumber} * {NumbersGenerator.SecondNumber} =";
+            rightAnswer = NumbersGenerator.RightAnswer;
         }
     }
 }

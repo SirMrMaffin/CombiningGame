@@ -5,16 +5,20 @@ namespace CombiningGame.Generators
 {
     class TwoRandomOneToTenNumbersGenerator
     {
-        public int RightAnswer;
-        public int firstNumber;
-        public int secondNumber;
+
+        public int RightAnswer { get; set; }
+        public int FirstNumber { get; set; }
+        public int SecondNumber { get; set; }
+
+        private readonly int minNum = 1;
+        private readonly int maxNum = 10;
 
         public void GenerateRandomNumbers()
         {
             var random = new Random();
-            firstNumber = random.Next(1, 10);
-            secondNumber = random.Next(1, 10);
-            RightAnswer = firstNumber * secondNumber;
+            FirstNumber = random.Next(minNum, maxNum);
+            SecondNumber = random.Next(minNum, maxNum);
+            RightAnswer = FirstNumber * SecondNumber;
         }
     }
 }
