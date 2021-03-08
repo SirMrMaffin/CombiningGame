@@ -7,7 +7,7 @@ namespace CombiningGame.Managers
 {
     public class GameManager
     {
-        private readonly TwoRandomOneToTenNumbersGenerator NumbersGenerator = new TwoRandomOneToTenNumbersGenerator();
+        private readonly TwoRandomOneToTenNumbersGenerator NumbersGenerator = new TwoRandomOneToTenNumbersGenerator(1, 10);
         private readonly Stopwatch stopWatch = new Stopwatch();
 
         private Label numsLabel;

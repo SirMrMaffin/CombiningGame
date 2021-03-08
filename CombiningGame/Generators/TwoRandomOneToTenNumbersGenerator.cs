@@ -1,24 +1,28 @@
 ﻿using System;
-using System.Windows.Controls;
 
 namespace CombiningGame.Generators
 {
     public class TwoRandomOneToTenNumbersGenerator
     {
 
-        public int RightAnswer { get; set; }
+        public int RightAnswer { get => FirstNumber * SecondNumber; }
         public int FirstNumber { get; set; }
         public int SecondNumber { get; set; }
 
-        private readonly int minNum = 1;
-        private readonly int maxNum = 10;
+        private readonly int _minNum;
+        private readonly int _maxNum;
+
+        public TwoRandomOneToTenNumbersGenerator(int minNum, int maxNum)
+        {
+            _minNum = minNum;
+            _maxNum = maxNum;
+        }
 
         public void GenerateRandomNumbers()
         {
             var random = new Random();
-            FirstNumber = random.Next(minNum, maxNum);
-            SecondNumber = random.Next(minNum, maxNum);
-            RightAnswer = FirstNumber * SecondNumber;
+            FirstNumber = random.Next(_minNum, _maxNum);
+            SecondNumber = random.Next(_minNum, _maxNum);
         }
     }
 }
