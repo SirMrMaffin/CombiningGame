@@ -3,7 +3,7 @@ using System.Windows.Controls;
 
 namespace CombiningGame.Generators
 {
-    class TwoRandomOneToTenNumbersGenerator
+    public class TwoRandomOneToTenNumbersGenerator
     {
 
         public int RightAnswer { get; set; }
