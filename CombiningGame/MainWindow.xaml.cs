@@ -1,6 +1,4 @@
-﻿using CombiningGame.Generators;
-using CombiningGame.Managers;
-using System.Diagnostics;
+﻿using CombiningGame.Managers;
 using System.Windows;
 using System.Windows.Input;
 

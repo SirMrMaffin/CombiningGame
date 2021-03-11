@@ -7,13 +7,14 @@ namespace CombiningGame.Managers
 {
     public class GameManager
     {
-        private readonly TwoRandomOneToTenNumbersGenerator NumbersGenerator = new TwoRandomOneToTenNumbersGenerator(1, 10);
+        private readonly RandomNumbersGenerator numbersGenerator = new RandomNumbersGenerator(1, 10);
         private readonly Stopwatch stopWatch = new Stopwatch();
 
-        private Label numsLabel;
+        private readonly Label numsLabel;
+        private readonly int timeInput = 0;
+        
         private int rightAnswersScore = 0;
         private int wrongAnswersScore = 0;
-        private int timeInput = 0;
 
         public GameManager(string timeString, Label numsLabel)
         {
@@ -26,7 +27,7 @@ namespace CombiningGame.Managers
             rightAnswersScore = 0;
             wrongAnswersScore = 0;
             stopWatch.Start();
-            NumbersGenerator.GenerateRandomNumbers();
+            numbersGenerator.Generate();
             UpdateNumbers();
         }
 
@@ -35,7 +36,7 @@ namespace CombiningGame.Managers
             if (stopWatch.IsRunning)
             {
                 CheckAnswer(answer);
-                NumbersGenerator.GenerateRandomNumbers();
+                numbersGenerator.Generate();
                 UpdateNumbers();
                 CheckStopWatch();
             }
@@ -54,7 +55,7 @@ namespace CombiningGame.Managers
 
         private void CheckAnswer(string userAnswer)
         {
-            if (NumbersGenerator.RightAnswer.Equals(int.Parse(userAnswer)))
+            if (numbersGenerator.RightAnswer.Equals(int.Parse(userAnswer)))
             {
                 rightAnswersScore++;
             }
@@ -66,7 +67,7 @@ namespace CombiningGame.Managers
 
         private void UpdateNumbers()
         {
-            numsLabel.Content = $"{NumbersGenerator.FirstNumber} * {NumbersGenerator.SecondNumber} =";
+            numsLabel.Content = $"{numbersGenerator.FirstNumber} * {numbersGenerator.SecondNumber} =";
         }
     }
 }

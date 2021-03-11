@@ -2,7 +2,7 @@
 
 namespace CombiningGame.Generators
 {
-    public class TwoRandomOneToTenNumbersGenerator
+    public class RandomNumbersGenerator
     {
 
         public int RightAnswer { get => FirstNumber * SecondNumber; }
@@ -12,13 +12,13 @@ namespace CombiningGame.Generators
         private readonly int _minNum;
         private readonly int _maxNum;
 
-        public TwoRandomOneToTenNumbersGenerator(int minNum, int maxNum)
+        public RandomNumbersGenerator(int minNum, int maxNum)
         {
             _minNum = minNum;
             _maxNum = maxNum;
         }
 
-        public void GenerateRandomNumbers()
+        public void Generate()
         {
             var random = new Random();
             FirstNumber = random.Next(_minNum, _maxNum);
